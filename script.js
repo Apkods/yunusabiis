@@ -1,4 +1,3 @@
-
 // ===== YARDIMCI FONKSİYONLAR VE VERİLER =====
 const $ = (s) => document.querySelector(s),
   fm = (n) => n.toLocaleString("tr-TR") + " ₺";
@@ -45,7 +44,7 @@ const ty = (s) => [0, 1, 2, 0][s],
 
 // Logo (SVG olarak çiziliyor)
 const logo = (c) =>
-  `<svg class="lg ${c || ""}" viewBox="0 0 340 64" aria-label="Demo Şirket"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path class="d" pathLength="1" d="M32 4 60 32 32 60 4 32Z"/><path class="d" pathLength="1" stroke="#AB978C" d="M32 15 49 32 32 49 15 32Z"/><path class="d" pathLength="1" stroke="#AB978C" d="M32 26 38 32 32 38 26 32Z"/></g><text class="t" x="76" y="35" font-family="Cormorant Garamond,Georgia,serif" font-size="30" font-weight="600" fill="currentColor" letter-spacing="1.5">DEMO ŞİRKET</text><text class="t" x="77" y="53" font-size="9.5" letter-spacing="4.2" fill="#AB978C" font-family="Inter,sans-serif">GAZİANTEP HALI</text></svg>`;
+  `<svg class="lg ${c || ""}" viewBox="0 0 340 64" aria-label="Demo Şirket"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path class="d" pathLength="1" d="M32 4 60 32 32 60 4 32Z"/><path class="d" pathLength="1" stroke="#F9C909" d="M32 15 49 32 32 49 15 32Z"/><path class="d" pathLength="1" stroke="#F9C909" d="M32 26 38 32 32 38 26 32Z"/></g><text class="t" x="76" y="35" font-family="Cormorant Garamond,Georgia,serif" font-size="30" font-weight="600" fill="currentColor" letter-spacing="1.5">DEMO ŞİRKET</text><text class="t" x="77" y="53" font-size="9.5" letter-spacing="4.2" fill="#F9C909" font-family="Inter,sans-serif">GAZİANTEP HALI</text></svg>`;
 
 // Halı deseni üreten fonksiyon (SVG)
 const rug = (pi, t, k) => {
@@ -207,16 +206,27 @@ let cart = [],
   tt;
 
 // ===== SAYFALAR =====
+const tick = () => {
+  const t = [
+    "ÜCRETSİZ KARGO",
+    "TÜM ÜRÜNLERDE %15 İNDİRİM",
+    "FABRİKADAN DOĞRUDAN FİYAT",
+    "14 GÜN İADE",
+    "ÖZEL ÖLÇÜ ÜRETİM",
+  ]
+    .map((x) => `<span>${x}</span>`)
+    .join("<i>✦</i>");
+  return `<div class="mq" aria-hidden="true"><div class="mt">${t}<i>✦</i>${t}<i>✦</i></div></div>`;
+};
 const sh = (k, t, l) =>
-  `<div class="kick" style="color:var(--acc);text-align:center">${k}</div><h2 class="hd2">${t}</h2><p class="lead">${l}</p>`;
-const faqs = (a) =>
-  a.map((f) => `<details><summary>${f[0]}</summary><p>${f[1]}</p></details>`).join("");
+  `<div class="kick" style="color:var(--acct);text-align:center">${k}</div><h2 class="hd2">${t}</h2><p class="lead">${l}</p>`;
+const faqs = (a) => a.map((f) => `<details><summary>${f[0]}</summary><p>${f[1]}</p></details>`).join("");
 const box = (a, c) =>
   `<div class="${c}">${a.map((x) => `<div><h3>${x[0]}</h3><p>${x[1]}</p></div>`).join("")}</div>`;
 function home() {
   return (
     `<section class="hero"><div class="hbg"></div><div class="w"><div><div class="kick">Gaziantep’ten sevgiyle</div><h1>Tüm ürünlerde<br><em>%15 indirim</em></h1><p>Evinizin ilk adımı bir halıyla başlar. Kendi fabrikamızda dokuduğumuz her halıyı bu sezon %15 indirimle sunuyoruz. Çünkü evinizin en güzel haline layıksınız.</p><a class="btn" href="#liste-tum">Koleksiyonu keşfet</a></div><div class="fl">${[0, 2, 5].map(card).join("")}</div></div></section>
-<div class="tr"><div class="w">${[
+${tick()}<div class="tr"><div class="w">${[
       ["Fabrika çıkışlı fiyat", "Aracı yok. Üreticiden size doğrudan."],
       ["Ücretsiz kargo", "81 ile sigortalı ve özenli teslimat."],
       ["14 gün iade", "Beğenmezseniz halıyı kapınızdan alırız."],
@@ -250,10 +260,7 @@ function home() {
 <section class="sec">${sh("Müşterilerimiz", "Evlerine konuk olduğumuz insanlar", "Halılarımız binlerce evde yaşıyor. Hikâyemizi onların sözlerinden dinleyin.")}<div class="tm">${[
       ["Salonumun havası değişti. Misafirlerim önce halıya bakıyor.", "Elif K. Ankara"],
       ["Ölçüyü kendi odama göre dokudular. Hiç beklemediğim bir özen gördüm.", "Murat A. İzmir"],
-      [
-        "Kargo özenliydi ve halı fotoğraftan bile güzel. Kesinlikle tavsiye ederim.",
-        "Zeynep T. İstanbul",
-      ],
+      ["Kargo özenliydi ve halı fotoğraftan bile güzel. Kesinlikle tavsiye ederim.", "Zeynep T. İstanbul"],
     ]
       .map((x) => `<div><p>${x[0]}</p><b>${x[1]}</b></div>`)
       .join("")}</div></section>
@@ -272,15 +279,9 @@ const about = () =>
     `<section class="sec">${sh("Değerlerimiz", "Bizi biz yapan dört söz", "Halıya bakışımız bu dört sözle özetlenir. Sizin için de aynısını vadediyoruz.")}${box(
       [
         ["Emek", "Her düğüm elle atılır. Acele etmeyiz çünkü iyi şey zaman ister."],
-        [
-          "Doğal iplik",
-          "Yerli yün ve pamuk kullanırız. Ailenizin sağlığı için en saf olanı seçeriz.",
-        ],
+        ["Doğal iplik", "Yerli yün ve pamuk kullanırız. Ailenizin sağlığı için en saf olanı seçeriz."],
         ["Dürüst fiyat", "Aracı yok. Fabrikadan doğrudan size hak ettiğiniz fiyatı sunarız."],
-        [
-          "Size özen",
-          "Siz bizim için bir sipariş numarası değilsiniz. Evimize gelen bir misafirsiniz.",
-        ],
+        ["Size özen", "Siz bizim için bir sipariş numarası değilsiniz. Evimize gelen bir misafirsiniz."],
       ],
       "g4",
     )}</section><section class="sec alt">${sh("Yolculuğumuz", "Küçük atölyeden büyük fabrikaya", "Yıllar içinde büyüdük ama özümüzü hiç değiştirmedik.")}<div class="tl">${[
@@ -353,7 +354,7 @@ function list(k) {
     t = LK[k][0];
     ids = T(LK[k][1]);
   } else if (k == "toptan") t = "Toptan Satın Alım";
-  return `<section class="sec"><div class="w"><div class="kick" style="color:var(--acc)">${ids.length} ürün</div><h1 style="font-size:67.5px;margin-bottom:24px">${t}</h1>${k == "toptan" ? `<div class="sum" style="margin-bottom:34px"><h3 style="font-size:32.5px">Fabrika fiyatıyla toptan alım</h3><p class="mut">Otel ofis ve mağazalar için minimum 10 adet siparişte özel fiyat. Ölçüyü rengi ve deseni birlikte belirleyelim.</p><input placeholder="Firma adı"><input placeholder="Telefon"><button class="btn" onclick="toast('Demo site. Teklif talebi gönderilmez.')">Demo teklif iste</button></div>` : ""}<div class="pg ls">${ids.map(card).join("")}</div></div></section>`;
+  return `<section class="sec"><div class="w"><div class="kick" style="color:var(--acct)">${ids.length} ürün</div><h1 style="font-size:67.5px;margin-bottom:24px">${t}</h1>${k == "toptan" ? `<div class="sum" style="margin-bottom:34px"><h3 style="font-size:32.5px">Fabrika fiyatıyla toptan alım</h3><p class="mut">Otel ofis ve mağazalar için minimum 10 adet siparişte özel fiyat. Ölçüyü rengi ve deseni birlikte belirleyelim.</p><input placeholder="Firma adı"><input placeholder="Telefon"><button class="btn" onclick="toast('Demo site. Teklif talebi gönderilmez.')">Demo teklif iste</button></div>` : ""}<div class="pg ls">${ids.map(card).join("")}</div></div></section>`;
 }
 
 // Ürün sayfası
@@ -365,7 +366,7 @@ function prod(i) {
     rel = P.map((_, j) => j)
       .filter((j) => j != i && P[j][1] == p[1])
       .slice(0, 4);
-  return `<section class="sec"><div class="pv"><div class="im">${rug(p[4], ty(p[2]), i)}</div><div><div class="kick" style="color:var(--acc)">${COLL[p[1]]} ${STY[p[2]]}</div><h1>${p[0]}</h1><div class="pp">${fm(n)} <s>${fm(old(n))}</s></div><p class="mut">Gaziantep’te kendi atölyemizde sizin için dokundu. Yoğun havı ayağınıza yumuşak bir dokunuş sunar. Leke tutmayan yapısıyla yıllarca ilk günkü gibi kalır. Kampanya boyunca %15 indirimle sizin.</p><b>Ölçü</b><div class="szs">${SZ.map((z, j) => `<button class="${j == ps.s ? "on" : ""}" onclick="pick(${j})">${z[0]} cm</button>`).join("")}</div><div class="qt"><button onclick="qty(-1)">−</button><b>${ps.q}</b><button onclick="qty(1)">+</button></div><div class="acts"><button class="btn o" onclick="add(${i})">Sepete ekle</button><button class="btn" onclick="add(${i},1)">Hemen al</button></div><ul class="sp"><li>Yün ve pamuk karışımı doğal iplik</li><li>Gaziantep’te elde dokundu</li><li>Ücretsiz kargo ve 14 gün iade</li><li>Beğenmezseniz halıyı kapınızdan alırız</li></ul></div></div>${rel.length ? `<div class="w" style="margin-top:70px"><h2 style="font-size:45px;margin-bottom:20px">Aynı koleksiyondan</h2><div class="pg ls">${rel.map(card).join("")}</div></div>` : ""}</section>`;
+  return `<section class="sec"><div class="pv"><div class="im">${rug(p[4], ty(p[2]), i)}</div><div><div class="kick" style="color:var(--acct)">${COLL[p[1]]} ${STY[p[2]]}</div><h1>${p[0]}</h1><div class="pp">${fm(n)} <s>${fm(old(n))}</s></div><p class="mut">Gaziantep’te kendi atölyemizde sizin için dokundu. Yoğun havı ayağınıza yumuşak bir dokunuş sunar. Leke tutmayan yapısıyla yıllarca ilk günkü gibi kalır. Kampanya boyunca %15 indirimle sizin.</p><b>Ölçü</b><div class="szs">${SZ.map((z, j) => `<button class="${j == ps.s ? "on" : ""}" onclick="pick(${j})">${z[0]} cm</button>`).join("")}</div><div class="qt"><button onclick="qty(-1)">−</button><b>${ps.q}</b><button onclick="qty(1)">+</button></div><div class="acts"><button class="btn o" onclick="add(${i})">Sepete ekle</button><button class="btn" onclick="add(${i},1)">Hemen al</button></div><ul class="sp"><li>Yün ve pamuk karışımı doğal iplik</li><li>Gaziantep’te elde dokundu</li><li>Ücretsiz kargo ve 14 gün iade</li><li>Beğenmezseniz halıyı kapınızdan alırız</li></ul></div></div>${rel.length ? `<div class="w" style="margin-top:70px"><h2 style="font-size:45px;margin-bottom:20px">Aynı koleksiyondan</h2><div class="pg ls">${rel.map(card).join("")}</div></div>` : ""}</section>`;
 }
 
 // Satın alma sayfası (DEMO SATIN ALMA butonu burada)
@@ -376,6 +377,35 @@ function pay() {
 function show(v, top) {
   $("#m").innerHTML = v;
   if (top !== 0) scrollTo(0, 0);
+  reveal();
+}
+// Kaydırdıkça öğeleri yumuşakça gösterir
+function reveal() {
+  if (!("IntersectionObserver" in window)) return;
+  const io = new IntersectionObserver(
+    (es) =>
+      es.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("in");
+          io.unobserve(e.target);
+        }
+      }),
+    { threshold: 0.1 },
+  );
+  document
+    .querySelectorAll(".sec .tx,.pg .cd,.cl a,.pc>div,.tm>div,.g4>div,.g3>div,.tl>div,.st>div")
+    .forEach((el, i) => {
+      el.classList.add("rv");
+      el.style.transitionDelay = (i % 4) * 70 + "ms";
+      io.observe(el);
+    });
+  setTimeout(() => document.querySelectorAll(".rv:not(.in)").forEach((e) => e.classList.add("in")), 4000);
+}
+// Mobil menüyü aç kapat
+function mm() {
+  const o = document.body.classList.toggle("mopen");
+  $("#sh").classList.toggle("on", o);
+  $("#dr").classList.remove("on");
 }
 
 // Sayfa yönlendirme (adres çubuğundaki # kısmına göre)
@@ -422,6 +452,7 @@ function upd() {
     : "";
 }
 function drawer(o) {
+  document.body.classList.remove("mopen");
   $("#dr").classList.toggle("on", !!o);
   $("#sh").classList.toggle("on", !!o);
 }
@@ -489,6 +520,10 @@ $("#mn").innerHTML = MN.map(
   (m) =>
     `<li><button class="b" onclick="tg(this)">${m[0]}</button><div class="mega"><div class="lt">${m[1].map((x, j) => `<a class="it ${j ? "" : "on"}" data-j="${j}" href="#${x[1]}" onmouseenter="hv(this)" onfocus="hv(this)">${x[0]}<i>→</i></a>`).join("")}</div><div class="rt">${m[1].map((x, j) => `<div class="pn ${j ? "" : "on"}" data-j="${j}"><h5>${x[0]}</h5><p>${x[2]}</p><div class="mp">${x[3].map((i) => `<a class="mc" href="#urun-${i}"><div class="im">${rug(P[i][4], ty(P[i][2]), i)}</div><span>${P[i][0]}</span><b>${fm(P[i][3])}</b></a>`).join("")}</div><a class="l" href="#${x[1]}">Hepsini gör →</a></div>`).join("")}</div></div></li>`,
 ).join("");
+$("#mn").insertAdjacentHTML(
+  "beforeend",
+  `<li class="mli"><a class="b" href="#hakkimizda">Hakkımızda</a></li><li class="mli"><a class="b" href="#iletisim">İletişim</a></li><li class="mli"><a class="b" href="#yardim">Yardım ve Destek</a></li><li class="mli"><button class="b" onclick="mm();ovR()">Kayıt Ol</button></li><li class="mli"><a class="b" href="#instagram" onclick="mm();return demo()">Instagram</a></li><li class="mli"><a class="b" href="#facebook" onclick="mm();return demo()">Facebook</a></li>`,
+);
 $("#lgo").innerHTML = logo();
 $("#sp").innerHTML = logo("an");
 setTimeout(() => $("#sp").classList.add("off"), 3000);

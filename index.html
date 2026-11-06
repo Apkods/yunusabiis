@@ -2,6 +2,8 @@
 <html lang="tr">
   <head>
     <meta charset="utf-8" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#FFD711" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Demo Şirket Gaziantep Halı</title>
     <link
@@ -23,8 +25,11 @@
     </div>
     <header class="hd">
       <div class="w">
-        <div>
-          <button class="sb" onclick="ovS()">
+        <div class="lf">
+          <button class="ib hb" onclick="mm()" aria-label="Menüyü aç">
+            <svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+          </button>
+          <button class="sb" onclick="ovS()" aria-label="Ara">
             <svg class="i" viewBox="0 0 24 24">
               <circle cx="11" cy="11" r="7" />
               <path d="m20 20-4-4" /></svg
@@ -33,13 +38,13 @@
         </div>
         <a href="#anasayfa" id="lgo"></a>
         <div class="ic">
-          <a class="ib" href="#instagram" onclick="return demo();" aria-label="Instagram"
+          <a class="ib soc" href="#instagram" onclick="return demo();" aria-label="Instagram"
             ><svg class="i" viewBox="0 0 24 24">
               <rect x="3" y="3" width="18" height="18" rx="5" />
               <circle cx="12" cy="12" r="4" />
               <circle cx="17.3" cy="6.7" r=".6" /></svg
           ></a>
-          <a class="ib" href="#facebook" onclick="return demo();" aria-label="Facebook"
+          <a class="ib soc" href="#facebook" onclick="return demo();" aria-label="Facebook"
             ><svg class="i" viewBox="0 0 24 24">
               <path d="M14 9h3V5h-3a4 4 0 0 0-4 4v2H7v4h3v6h4v-6h3l1-4h-4V9z" /></svg
           ></a>
@@ -57,15 +62,18 @@
         </div>
       </div>
     </header>
-    <nav><ul id="mn"></ul></nav>
+    <nav aria-label="Ana menü">
+      <div class="nh"><span>Menü</span><button onclick="mm()" aria-label="Menüyü kapat">×</button></div>
+      <ul id="mn"></ul>
+    </nav>
     <main id="m"></main>
     <footer>
       <div class="w">
         <div>
           <h4>Demo Şirket</h4>
           <p>
-            Gaziantep’te kendi fabrikamızda dokunan halılar. Bu site bir tasarım demosudur ve gerçek
-            satış yapılmaz.
+            Gaziantep’te kendi fabrikamızda dokunan halılar. Bu site bir tasarım demosudur ve gerçek satış
+            yapılmaz.
           </p>
         </div>
         <div>
